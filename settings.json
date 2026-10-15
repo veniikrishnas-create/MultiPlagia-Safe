@@ -1,0 +1,17 @@
+{
+    "username": "admin",
+    "email": "vvv@example.com",
+    "password": "1234",
+    "notifications": {
+        "email_reports": true,
+        "sms_alerts": false,
+        "weekly_summary": true
+    },
+    "privacy": {
+        "private_uploads": true,
+        "share_data": false,
+        "two_factor": false
+    },
+    "theme": "Light",
+    "language": "English"
+}
