@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How to Use • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+      color: #1f2937;
+      display: flex;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* ---------- MAIN CONTAINER ---------- */
+    .container {
+      margin-left: 280px; /* reserve space for sidebar */
+      padding: 30px;
+      max-width: 1000px;
+      margin-top: 20px;
+    }
+
+    marquee {
+      background: #e6f2ff;
+      color: #003366;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 8px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003366;
+      margin-top: 10px;
+    }
+
+    .steps {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 2px solid #00897b;
+      border-radius: 10px;
+      margin: 15px 0;
+      padding: 15px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .steps img {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .steps div {
+      flex: 1;
+    }
+
+    .steps h2 {
+      margin: 0;
+      color: #0066cc;
+    }
+
+    .steps p {
+      margin: 5px 0 0;
+    }
+
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .container { margin-left: 220px; }
+    }
+
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .container { margin: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page')}}"><i class="fa-solid fa-right-from-bracket"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+        <a href="#"><i class="fa-solid fa-star"></i> Reviews</a>
+
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a> </div>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <marquee scrollamount="6">
+      ✨ Be Original, Be Creative, Be You! | ❌ Say No to Copy-Paste | 🚀 PlagiaSafe Helps You Stay Unique!
+    </marquee>
+
+    <h1>Step-by-Step Guide to Using PlagiaSafe</h1>
+
+    <!-- Step 1 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/5087/5087579.png" alt="Login Icon">
+      <div>
+        <h2>Step 1: Login</h2>
+        <p>Enter your username & password to access the plagiarism checker.</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Select Category Icon">
+      <div>
+        <h2>Step 2: Select Category</h2>
+        <p>Choose your category (Story, Essay, Logo, Painting, etc.) before uploading.</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" alt="Upload File Icon">
+      <div>
+        <h2>Step 3: Upload File</h2>
+        <p>Upload your text file (.txt, .docx) or image (.jpg, .png) for checking.</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Check Plagiarism Icon">
+      <div>
+        <h2>Step 4: Check Plagiarism</h2>
+        <p>Click the “Check Plagiarism” button and wait while your file is scanned.</p>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828743.png" alt="View Results Icon">
+      <div>
+        <h2>Step 5: View Results</h2>
+        <p>See plagiarism percentage, matched content highlights, or side-by-side image comparison.</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Download Report Icon">
+      <div>
+        <h2>Step 6: Download Report</h2>
+        <p>Download your detailed plagiarism report in PDF/HTML format with date & time.</p>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="steps">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" alt="History Icon">
+      <div>
+        <h2>Step 7: View History</h2>
+        <p>Check your previous plagiarism results and download past reports anytime.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 PlagiaSafe | Stay Original • Stay Creative</p>
+    </footer>
+  </div>
+
+</body>
+</html>

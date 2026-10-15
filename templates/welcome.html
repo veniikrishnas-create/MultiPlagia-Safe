@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Welcome • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      display: flex;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+ background-color: #f0f4f8;
+      color: #1f2937;      
+      background-size: 300% 300%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+       width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* ---------- CONTENT ---------- */
+    .content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+      align-items: center;
+    }
+
+    .card {
+       background-color: #fff;
+      text-align: center;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      border: 2px solid #00897b;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    .card h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #00897b;
+      border-bottom: 2px solid #00897b;
+    }
+
+    .card p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #10b981;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      box-shadow: 0 0 8px rgba(16,185,129,0.6);
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #059669;
+      box-shadow: 0 0 16px rgba(16,185,129,0.9);
+      transform: translate(-2px);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.1);
+      text-align: center;
+      padding: 25px;
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    }
+
+    .feature-card i {
+      font-size: 32px;
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .content { padding: 30px; }
+    }
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; overflow-x: auto; }
+      .content { margin-top: 20px; padding: 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page') }}"><i class="fa-solid fa-file-lines"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Welcome Card -->
+    <div class="card">
+      <h1>🎉 Welcome, {{ session['user'] }}!</h1>
+      <p>You have successfully logged in.</p>
+      <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+      <div class="feature-card">
+        <i class="fa-solid fa-file-circle-check"></i>
+        <h3>Accurate Detection</h3>
+        <p>PlagiaSafe finds even subtle text and code similarities.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fa-solid fa-chart-pie"></i>
+        <h3>Detailed Reports</h3>
+        <p>Easy-to-read plagiarism reports with highlighted results.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fa-solid fa-cloud-upload-alt"></i>
+        <h3>Multiple Formats</h3>
+        <p>Upload text, documents, or code files for scanning.</p>
+      </div>
+      
+
+    
+  </div>
+
+</body>
+</html>

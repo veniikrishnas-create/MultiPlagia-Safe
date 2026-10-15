@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reviews • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+      color: #1f2937;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* Container */
+    .container {
+      margin-left: 280px;
+      padding: 40px 30px;
+      max-width: 1000px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00695c;
+    }
+
+    /* Review Card */
+    .review-card {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .review-card h3 {
+      margin-top: 0;
+      color: #00897b;
+    }
+
+    .review-card p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+    .stars {
+      color: #fbc02d;
+      margin-bottom: 10px;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    /* Review Form */
+    .review-form {
+      background: white;
+      padding: 25px;
+      border: 2px solid #00897b;
+      border-radius: 12px;
+      margin-top: 40px;
+    }
+
+    .review-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00897b;
+    }
+
+    .review-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .review-form input,
+    .review-form textarea,
+    .review-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .review-form button {
+      background-color: #00897b;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .review-form button:hover {
+      background-color: #00695c;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .container {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand">
+      <i class="fa-solid fa-shield"></i> PlagiaSafe
+    </div>
+
+    <!-- Example links - update URLs to your routes -->
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page') }}"><i class="fa-solid fa-right-from-bracket"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('review') }}"><i class="fa-solid fa-star"></i> Reviews</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>🌟 User Reviews</h1>
+
+    <!-- Static Reviews -->
+    <div class="review-card">
+      <h3>John D.</h3>
+      <div class="stars">★★★★★</div>
+      <p>PlagiaSafe is an excellent tool for checking originality. I love the detailed reports and image comparison!</p>
+    </div>
+
+    <div class="review-card">
+      <h3>Sarah A.</h3>
+      <div class="stars">★★★★☆</div>
+      <p>Very useful for students like me. Helped avoid accidental plagiarism. UI is user-friendly too.</p>
+    </div>
+
+    <div class="review-card">
+      <h3>Prof. Rajan K.</h3>
+      <div class="stars">★★★★★</div>
+      <p>I recommend this to all my students. Quick scanning and multiple format support is a big plus.</p>
+    </div>
+
+    <!-- User Submitted Reviews -->
+<!-- User Submitted Reviews -->
+{% for review in reviews %}
+<div class="review-card">
+  <h3>{{ review.name }}</h3>
+  <div class="stars">
+    {% for i in range(review.stars) %}★{% endfor %}
+    {% for i in range(5 - review.stars) %}☆{% endfor %}
+  </div>
+  <p>{{ review.message }}</p>
+  <form method="POST" action="{{ url_for('delete_review', review_id=review.id) }}" style="display:inline;">
+    <button type="submit" style="background:#e74c3c; color:#fff; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">
+      Delete
+    </button>
+  </form>
+</div>
+{% endfor %}
+
+
+    <!-- Review Form -->
+    <div class="review-form">
+      <h2>📝 Leave a Review</h2>
+      <form method="POST" action="{{ url_for('review') }}">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="stars">Your Rating:</label>
+        <select id="stars" name="stars" required>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+
+        <label for="message">Your Review:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Submit Review</button>
+      </form>
+
+      {% if success %}
+      <p style="color: green;">✅ Thank you! Your review was submitted.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

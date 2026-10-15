@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset body */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Fullscreen background video */
+    .video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;  /* ensures video always fills screen */
+}
+
+
+    /* Login Card */
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      width: 350px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      color: #00f5d4;
+    }
+
+    .login-container label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: #00bbf9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .login-container button:hover {
+      background: #0096c7;
+      box-shadow: 0 0 12px rgba(0,191,249,0.9);
+    }
+
+    .login-container .forgot-password {
+      display: block;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #f9c74f;
+      text-decoration: none;
+      text-align: right;
+    }
+
+    .login-container .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .login-container .footer-text {
+      font-size: 14px;
+      margin-top: 15px;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <video autoplay muted loop class="video-bg">
+    <source src="{{ url_for('static', filename='gif.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2><i class="fa-solid fa-shield"></i> PlagiaSafe Login</h2>
+    <form action="/login" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+    
+
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+
+    <div class="footer-text">
+      &copy; {{ year }} PlagiaSafe. All rights reserved.
+    </div>
+  </div>
+
+</body>
+</html>

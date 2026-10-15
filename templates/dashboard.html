@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PlagiaSafe • Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f0f4f8;
+      color: #1f2937;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #00897b;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* Main container */
+    .container {
+      margin-left: 240px;
+      padding: 30px;
+      flex: 1;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    /* Cards - centered grid layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(3, 220px); /* 3 fixed-width cards per row */
+      gap: 20px;
+      justify-content: center; /* center the grid horizontally */
+      margin: 0 auto;
+    }
+
+    .card {
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
+      color: #fff;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-card { background-color: #2563eb; }
+    .slides-card { background-color: #f97316; }
+    .image-card { background-color: #ec4899; } 
+     .para-card { background-color: #16a34a; }
+    .resume-card { background-color: #8b5cf6; }
+    .code-card { background-color: #ef4444;}
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 40px;
+      color: #1f2937;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .container { margin-left: 200px; }
+      .cards-container { grid-template-columns: repeat(2, 220px); }
+    }
+
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .container { margin: 20px; }
+      .cards-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page')}}"><i class="fa-solid fa-right-from-bracket"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+        <a href="{{ url_for('review') }}"><i class="fa-solid fa-star"></i> Reviews</a>
+
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <h1>Plagiarism Detection Dashboard</h1>
+    <p>Choose a check to begin</p>
+
+    <div class="cards-container">
+      <a href="{{ url_for('check_text') }}" class="card text-card">
+        <i class="fa-regular fa-file-lines" style="font-size:28px;"></i>
+        Text Plagiarism
+        <span>Upload two documents (txt, docx, pdf)</span>
+      </a>
+
+      <a href="{{ url_for('check_slides') }}" class="card slides-card">
+        <i class="fa-regular fa-file-powerpoint" style="font-size:28px;"></i>
+        Slides Check
+        <span>Upload two PPTX files</span>
+      </a>
+
+      <a href="{{ url_for('check_image') }}" class="card image-card">
+        <i class="fa-regular fa-image" style="font-size:28px;"></i>
+        Image Check
+        <span>Upload two images (png/jpg)</span>
+      </a>
+
+      <a href="{{ url_for('check_paraphrase') }}" class="card para-card">
+        <i class="fa-solid fa-quote-right" style="font-size:28px;"></i>
+        Paraphrase
+        <span>Compare two text files</span>
+      </a>
+
+      <a href="{{ url_for('check_resume') }}" class="card resume-card">
+        <i class="fa-regular fa-id-card" style="font-size:28px;"></i>
+        Resume
+        <span>Offline resume comparison</span>
+      </a>
+
+      <a href="{{ url_for('check_code') }}" class="card code-card">
+        <i class="fa-solid fa-code" style="font-size:28px;"></i>
+        Code Plagiarism
+        <span>Compare two code files</span>
+      </a>
+    </div>
+
+    <footer>© 2025 PlagiaSafe</footer>
+  </div>
+</body>
+</html>

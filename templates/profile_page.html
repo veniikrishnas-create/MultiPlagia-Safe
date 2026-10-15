@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Profile • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      min-height: 100vh;
+      color: #fff;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background video */
+    .bg-video {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-1;
+      filter:brightness(0.5);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 230px;
+      background: #00897b; /* unified color */
+      padding: 20px;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin: 6px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      color: #fff;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+    }
+
+    .profile-card h2 {
+      margin-bottom: 20px;
+      color: #00f5d4;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #00bbf9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0096c7;
+      box-shadow: 0 0 12px rgba(0,191,249,0.9);
+    }
+
+    .messages {
+      margin-top: 15px;
+      text-align: center;
+      color: #f9c74f;
+    }
+
+    @media (max-width: 600px) {
+      .content { padding: 20px; }
+      .sidebar { width: 100%; height: auto; position: relative; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='detection.gif.mp4') }}" type="video/mp4">
+  </video>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page') }}"><i class="fa-solid fa-file-lines"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="profile-card">
+      <h2><i class="fa-solid fa-user-gear"></i> Update Profile</h2>
+      <form method="POST">
+        <label>Username</label>
+        <input type="text" name="username" value="{{ profile.username }}" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
+        <button type="submit">Update</button>
+      </form>
+
+      <div class="messages">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for msg in messages %}
+              <p>{{ msg }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

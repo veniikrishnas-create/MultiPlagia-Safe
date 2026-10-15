@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>History • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f0f4f8;
+      color: #1f2937;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* Main container */
+    .container {
+      margin-left: 240px;
+      padding: 30px;
+      flex: 1;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      color: #000;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #00897b;
+      color: #fff;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      background-color: #00897b;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 4px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #00695c;
+    }
+
+    .btn.delete {
+      background-color: #e11d48;
+    }
+
+    .btn.delete:hover {
+      background-color: #b91c35;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .container { margin-left: 200px; }
+    }
+
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .container { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+     <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page')}}"><i class="fa-solid fa-right-from-bracket"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+      <a href="{{ url_for('review') }}" ><i class="fa-solid fa-star"></i> Reviews</a>
+
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="card">
+      <h2><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
+      <p>Below is the list of reports generated:</p>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Report Name</th>
+            <th>Generated Time</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in reports %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.time }}</td>
+            <td>
+              <a class="btn" href="{{ r.path }}">Download</a>
+              <a class="btn delete" href="{{ url_for('delete_report', filename=r.name) }}">Delete</a>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="4">No reports found</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <footer>© 2025 PlagiaSafe • Offline two-file checker</footer>
+  </div>
+
+</body>
+</html>

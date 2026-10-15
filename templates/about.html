@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+      color: #1f2937;
+      display: flex;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* ---------- CONTAINER ---------- */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      margin-left: 280px; /* space for sidebar */
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      border: 2px solid #00897b;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 25px;
+      color: #00897b;
+      border-bottom: 2px solid #00897b;
+      padding-bottom: 6px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      margin: 10px 0 20px 20px;
+      font-size: 16px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .container { margin-left: 220px; }
+    }
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .container { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('welcome') }}"><i class="fa-solid fa-house"></i> Welcome</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>About PlagiaSafe</h1>
+    <p>
+      <b>PlagiaSafe</b> is a modern plagiarism detection system designed for students, teachers, and professionals. 
+      Our goal is to make content originality checks faster, smarter, and easier to use. Whether you're submitting assignments, 
+      publishing research, or creating content, PlagiaSafe ensures that your work maintains academic integrity and credibility.
+    </p>
+
+    <h2>✨ Key Features</h2>
+    <ul>
+      <li><b>Text Checking:</b> Detects duplicate or paraphrased text across multiple sources.</li>
+      <li><b>Code Comparison:</b> Helps students and developers find copied or reused code blocks.</li>
+      <li><b>Resume & Document Scan:</b> Ensures originality in professional resumes and documents.</li>
+      <li><b>Report Generation:</b> Creates detailed reports with similarity percentage and highlighted matches.</li>
+      <li><b>User History:</b> Keeps track of all your past plagiarism checks for easy access.</li>
+    </ul>
+
+    <h2>🚀 Why Choose PlagiaSafe?</h2>
+    <p>
+      PlagiaSafe isn’t just a plagiarism checker—it’s a platform built with modern tools and an easy-to-use interface. 
+      We combine accuracy with simplicity, giving you fast results that you can trust. Our dashboard provides insights, 
+      charts, and a history of your scans to keep everything organized.
+    </p>
+
+    <h2>🌍 Our Mission</h2>
+    <p>
+      Our mission is to support education and originality. By preventing plagiarism, we encourage creativity, honesty, 
+      and academic growth. We aim to provide students, educators, and professionals with tools that help them succeed 
+      without compromising integrity.
+    </p>
+  </div>
+</body>
+</html>

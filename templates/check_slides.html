@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Slides Check • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg,#9b5de5,#f15bb5,#f9c74f,#00bbf9,#00f5d4);
+      background-size: 300% 300%;
+      animation: gradientBG 10s ease infinite;
+      min-height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+    @keyframes gradientBG {
+      0% { background-position:0% 50% }
+      50% { background-position:100% 50% }
+      100% { background-position:0% 50% }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #00897b;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.15);
+  
+    }
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin: 6px 0;
+      color: #e5e7eb;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Background Video */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.5);
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      margin-left: 250px; /* space for sidebar */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Card */
+    .card {
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+       background-color: #f97316;
+      text-align: center;
+      color: #fff;
+    }
+    .card h2 {
+      margin-bottom: 20px;
+      
+    }
+
+    /* Form */
+    .row {
+      margin: 12px 0;
+      text-align: left;
+    }
+    input[type=file] {
+      padding: 10px;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      width: 100%;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: #7a3605;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #14b8a6;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(20,184,166,0.6);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .content { margin-left: 220px; }
+    }
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .content { margin-left: 0; margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='detection.gif.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="content">
+    <div class="card">
+      <h2><i class="fa-regular fa-file-lines"></i> Slides – Compare Two Files</h2>
+      <form method="post" enctype="multipart/form-data">
+        <div class="row">
+          <label>File 1</label><br>
+          <input type="file" name="file1" accept=".pptx" required>
+        </div>
+        <div class="row">
+          <label>File 2</label><br>
+          <input type="file" name="file2" accept=".pptx" required>
+        </div>
+        <button class="btn" type="submit">Compare</button>
+      </form>
+      <footer>© 2025 PlagiaSafe</footer>
+    </div>
+  </div>
+</body>
+</html>

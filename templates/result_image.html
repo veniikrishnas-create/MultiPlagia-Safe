@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PlagiaSafe • Image Plagiarism Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+      color: #1f2937;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+    .sidebar a:hover { background: #00695c; padding-left: 30px; }
+
+    /* ---------- CONTENT ---------- */
+    .content {
+      flex: 1;
+      padding: 30px;
+      margin-left: 260px; /* space for sidebar */
+      overflow-y: auto;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    h2 { color: #00695c; margin-bottom: 20px; }
+
+    /* ---------- PROGRESS BAR ---------- */
+    .progress-container {
+      width: 100%;
+      background: #e0e0e0;
+      border-radius: 30px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .progress-bar {
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+    }
+    .green { background: #43a047; }
+    .orange { background: #fb8c00; }
+    .red { background: #e53935; }
+
+    /* ---------- FILE BOXES ---------- */
+    .files {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+    .file-box {
+      flex: 1;
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .file-box h3 {
+      margin-top: 0;
+      color: #37474f;
+      font-size: 18px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    /* ---------- DOWNLOAD BUTTON ---------- */
+    .download {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .download a {
+      text-decoration: none;
+      background: #00897b;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .download a:hover { background: #00695c; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+      margin-top: 40px;
+      opacity: 0.9;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .content { margin-left: 220px; }
+    }
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .content { margin-left: 0; margin: 20px; }
+      .files { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page') }}"><i class="fa-solid fa-file-lines"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="container">
+      <h2>🖼 Image Plagiarism Report</h2>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar {% if result.score < 40 %}green{% elif result.score < 70 %}orange{% else %}red{% endif %}" 
+             style="width: {{ result.score }}%;">
+          {{ result.score }}%
+        </div>
+      </div>
+
+      <!-- File Images -->
+      <div class="files">
+        <div class="file-box">
+          <h3>📂 File 1: {{ result.file1 }}</h3>
+          <img src="{{ result.file1_path }}" alt="File 1">
+        </div>
+        <div class="file-box">
+          <h3>📂 File 2: {{ result.file2 }}</h3>
+          <img src="{{ result.file2_path }}" alt="File 2">
+        </div>
+      </div>
+
+      <!-- Common Image Section -->
+      {% if result.result_common %}
+      <div class="common-box">
+        <h3>⚠ Detected Common / Plagiarised Region</h3>
+        <img src="{{ result.result_common }}" alt="Common/Plagiarised Part">
+      </div>
+      {% endif %}
+
+      <!-- Download -->
+      <div class="download">
+        <a href="{{ url_for('pdf_result', filename=result['report_file']) }}">📥 Download Report</a>
+      </div>
+    </div>
+
+    <footer>© 2025 PlagiaSafe</footer>
+  </div>
+</body>
+</html>

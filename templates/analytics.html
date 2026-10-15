@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Analytics • PlagiaSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+      color: #1f2937;
+      display: flex;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 240px;
+      background: #00897b;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .brand {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #00695c;
+      padding-left: 30px;
+    }
+
+    /* ---------- CONTENT ---------- */
+    .content {
+      flex: 1;
+      margin-left: 280px; /* space for sidebar */
+      padding: 30px;
+    }
+
+    .card {
+      padding: 24px;
+      margin: 20px 0;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid #00897b;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      margin-top: 0;
+      text-align: center;
+      color: #00897b;
+    }
+
+    canvas {
+      max-width: 600px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; }
+      .content { margin-left: 220px; }
+    }
+    @media (max-width: 600px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .content { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand"><i class="fa-solid fa-shield"></i> PlagiaSafe</div>
+
+      <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="{{ url_for('sample_page')}}"><i class="fa-solid fa-right-from-bracket"></i> Sample</a>
+    <a href="{{ url_for('tips_page') }}"><i class="fa-solid fa-lightbulb"></i> Tips</a>
+    <a href="{{ url_for('profile_page') }}"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="{{ url_for('about') }}"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+    <a href="{{ url_for('help_page') }}"><i class="fa-solid fa-circle-question"></i> Help</a>
+        <a href="{{ url_for('review') }}" ><i class="fa-solid fa-star"></i> Reviews</a>
+
+    <a href="{{ url_for('history') }}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+    <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="card">
+      <h2><i class="fa-solid fa-chart-pie"></i> Analytics</h2>
+      <p style="text-align:center;">Total Reports Generated: <b>{{ total_reports }}</b></p>
+    </div>
+
+    <div class="card">
+      <h3>Reports by Category (Pie)</h3>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>Reports by Category (Bar)</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <footer>© 2025 PlagiaSafe • Analytics</footer>
+  </div>
+
+  <script>
+    const categories = {{ categories_json | safe }};
+    const labels = Object.keys(categories);
+    const values = Object.values(categories);
+
+    // Pie Chart
+    new Chart(document.getElementById("pieChart"), {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: ["#2563eb","#f97316","#f43f5e","#16a34a","#a855f7","#facc15"]
+        }]
+      }
+    });
+
+    // Bar Chart
+    new Chart(document.getElementById("barChart"), {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Reports",
+          data: values,
+          backgroundColor: "#10b981"
+        }]
+      },
+      options: {scales:{y:{beginAtZero:true}}}
+    });
+  </script>
+</body>
+</html>
